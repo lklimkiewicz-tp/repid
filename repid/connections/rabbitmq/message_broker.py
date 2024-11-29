@@ -92,6 +92,7 @@ class RabbitMessageBroker(MessageBrokerT):
             routing_key=self.qnc(key.queue, delayed=exp is not None),
             properties=aiormq.spec.Basic.Properties(
                 message_id=key.id_,
+                persistent=True,
                 priority=key.priority,
                 expiration=exp,
                 delivery_mode=2 if self.idd(key) else 1,
